@@ -1,0 +1,20 @@
+https://leetcode.com/problems/average-salary-excluding-the-minimum-and-maximum-salary/
+
+class Solution {
+public:
+    double average(vector<int>& salary) {
+        int first,last;
+        first=last=salary[0];
+        double average=0;
+        for(int i:salary)
+        {
+            average+=i;
+            first=min(first,i);
+            last=max(last,i);
+        }    
+        average-=(first+last);
+        average/=(salary.size()-2);
+        return average;
+        
+    }
+};
