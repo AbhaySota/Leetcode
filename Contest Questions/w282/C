@@ -1,0 +1,38 @@
+class Solution {
+public:
+    bool tripsPossible(vector<int> &time , int totalTrips, long long int minTime)
+    {
+        long long int trips=0;
+        for(int i:time)
+        {   
+            trips+=(minTime/i);
+            if(trips>=totalTrips)
+                return true;
+        }
+         return false;
+    }
+    long long minimumTime(vector<int>& time, int totalTrips) {
+        
+        long long ans=-1,low=1,high,mid;
+        high=(long long)totalTrips*(*min_element(time.begin(),time.end()));
+        
+        while(low<=high)
+        {
+            mid=(low+high)/2;
+            if(tripsPossible(time,totalTrips,mid))
+            {
+                ans=mid;
+                high=mid-1;
+            }
+            else
+            {
+                low=mid+1;
+            }
+        }
+        
+        return ans;
+        
+        
+        
+    }
+};
