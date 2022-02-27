@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int minSteps(string s, string t) {
+        int freq[26]={0};
+        for(char &c:s)
+            freq[c-'a']++;
+        for(char &d:t)
+            freq[d-'a']--;
+        int ans=0;
+        for(int i:freq)
+            ans+=abs(i);
+        return ans;
+        
+    }
+};
