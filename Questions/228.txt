@@ -1,0 +1,58 @@
+class Solution {
+public:
+    string numToString(int i)
+    {
+        long long x=abs(i);
+        string ans="";
+        if(!i)
+            return "0";
+        while(x)
+        {
+            char c=(x%10) + '0';
+            ans+=c;
+            x/=10;
+        }
+        if(i<0)
+            ans+='-';
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+    vector<string> summaryRanges(vector<int>& nums) {
+        vector<string> ans;
+        string currentRange="";
+        int i=0,j=1;
+        if(!nums.size())
+            return ans;
+        for(i,j;j<nums.size();)
+        {
+            if(nums[j]-1!=nums[j-1])
+            {
+                if(i==j-1)
+                    currentRange+=(numToString(nums[i]));
+                else
+                {
+                    currentRange+=(numToString(nums[i]));
+                    currentRange+=("->");
+                    currentRange+=(numToString(nums[j-1]));
+                }
+                i=j;
+                ans.push_back(currentRange);
+                currentRange="";
+            }
+            j++;
+        }
+        
+        if(i==j-1)
+            currentRange+=(numToString(nums[i]));
+        else
+        {
+            currentRange+=(numToString(nums[i]));
+            currentRange+=("->");
+            currentRange+=(numToString(nums[j-1]));
+        }
+        ans.push_back(currentRange);
+        
+        return ans;
+    }
+};
+
